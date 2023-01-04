@@ -1,0 +1,26 @@
+{% extends "base.html" %} <title>{% block title %}Todo{% endblock %}</title>   {% block content %}
+
+
+<h1 class="ui center aligned header">Todo App</h1>
+  <form class="ui form" action="/add_todo" method="post">
+      <div class="field">
+          <label>Todo Title</label>
+          <input type="text" name="title" placeholder="Enter Todo..."><br>
+      </div>
+      <button class="ui blue button" type="submit">Add</button>
+  </form>
+  {% for todo in todo_lists %}
+  <div class="ui segment">
+      <p class="ui header">{{ todo.id }} | {{ todo.title }}</pclass>
+
+      {% if todo.complete == False %}
+        <span class="ui gray label">Not Complete</span>
+      {% else %}
+        <span class="ui green label">Completed</span>
+      {% endif %}
+      <a class="ui blue button" href="/todo/update/{{ todo.id }}">Update</a>
+      <a class="ui red button" href="/todo/delete/{{ todo.id }}">Delete</a>
+  </div>
+  {% endfor %}
+{% endblock %}
+
